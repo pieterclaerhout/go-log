@@ -13,45 +13,6 @@ import (
 	"github.com/pieterclaerhout/go-log"
 )
 
-func Test_AppInfo_Debug(t *testing.T) {
-
-	resetLogConfig()
-	stdout, stderr := redirectOutput()
-	defer resetLogOutput()
-
-	log.DebugMode = true
-
-	log.AppInfo("appName", "copyright")
-
-	actualStdOut := stdout.String()
-	actualStdErr := stderr.String()
-
-	assert.Contains(t, actualStdOut, "appName", "stdout-appName")
-	assert.Contains(t, actualStdOut, "copyright", "stdout-copyright")
-	assert.Contains(t, actualStdOut, "| DEBUG |", "stdout-time")
-	assert.Contains(t, actualStdOut, log.TimeFormat, "stdout-time")
-	assert.Equal(t, "", actualStdErr, "stderr")
-
-}
-
-func Test_AppInfo_Release(t *testing.T) {
-
-	resetLogConfig()
-	stdout, stderr := redirectOutput()
-	defer resetLogOutput()
-
-	log.DebugMode = false
-
-	log.AppInfo("appName", "copyright")
-
-	actualStdOut := stdout.String()
-	actualStdErr := stderr.String()
-
-	assert.Contains(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
-
-}
-
 func Test_Debug_Enabled(t *testing.T) {
 
 	resetLogConfig()
@@ -160,6 +121,44 @@ func Test_DebugSQL_Disabled(t *testing.T) {
 	actualStdErr := stderr.String()
 
 	assert.Equal(t, "", actualStdOut, "stdout")
+	assert.Equal(t, "", actualStdErr, "stderr")
+
+}
+
+func Test_DebugSeparator_Disabled(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.DebugMode = false
+	log.DebugSQLMode = false
+
+	log.DebugSeparator("debug")
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "", actualStdOut, "stdout")
+	assert.Equal(t, "", actualStdErr, "stderr")
+
+}
+
+func Test_DebugSeparator_Enabled(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.DebugMode = true
+	log.DebugSQLMode = true
+
+	log.DebugSeparator("debug")
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "test | DEBUG | ====[ debug ]===================================================================\n", actualStdOut, "stdout")
 	assert.Equal(t, "", actualStdErr, "stderr")
 
 }

@@ -3,7 +3,6 @@ package log
 import (
 	"io"
 	"os"
-	"runtime"
 	"strings"
 	"time"
 
@@ -42,15 +41,6 @@ var TimeFormat = DefaultTimeFormat
 
 // OsExit is the function to exit the app when a fatal error happens
 var OsExit = os.Exit
-
-// AppInfo logs the app info and the copyright statement
-func AppInfo(appName string, copyright string) {
-	PrintTimestamp = true
-	DebugSeparator("")
-	Debug(appName, "("+runtime.Version()+")")
-	Debug(copyright)
-	DebugSeparator("")
-}
 
 // Debug prints a debug message
 //
