@@ -16,6 +16,9 @@ import (
 var PrintTimestamp = false
 
 // DebugMode indicates if debug information should be printed or not
+//
+// If the environment variable called DEBUG is set to 1, this will default to true.
+// In all other cases, debug mode is false by default.
 var DebugMode = false
 
 // DebugSQLMode indicates if the SQL statements should be logged as debug messages
