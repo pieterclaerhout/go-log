@@ -2,6 +2,7 @@ package log
 
 import (
 	"fmt"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -11,6 +12,7 @@ var logMutex = &sync.Mutex{}
 
 func init() {
 	TimeZone, _ = time.LoadLocation("Europe/Brussels")
+	DebugMode = os.Getenv("DEBUG") == "1"
 }
 
 func formatMessage(args ...interface{}) string {
