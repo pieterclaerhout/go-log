@@ -1,6 +1,7 @@
 package log
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -55,6 +56,16 @@ func Debug(args ...interface{}) {
 	}
 }
 
+// Debugf prints a debug message with a format and arguments
+//
+// Only shown if DebugMode is set to true
+func Debugf(format string, args ...interface{}) {
+	if DebugMode {
+		msg := fmt.Sprintf(format, args...)
+		Debug(msg)
+	}
+}
+
 // DebugSeparator prints a debug separator
 //
 // Only shown if DebugMode is set to true
@@ -96,6 +107,12 @@ func Info(args ...interface{}) {
 	printMessage("INFO ", message)
 }
 
+// Infof prints an info message with a format and arguments
+func Infof(format string, args ...interface{}) {
+	msg := fmt.Sprintf(format, args...)
+	Info(msg)
+}
+
 // InfoSeparator prints an info separator
 func InfoSeparator(args ...interface{}) {
 	message := formatMessage(args...)
@@ -119,6 +136,12 @@ func Warn(args ...interface{}) {
 	printMessage("WARN ", message)
 }
 
+// Warnf prints a warning message with a format and arguments
+func Warnf(format string, args ...interface{}) {
+	msg := fmt.Sprintf(format, args...)
+	Warn(msg)
+}
+
 // WarnDump dumps the argument as a warning message with an optional prefix
 func WarnDump(arg interface{}, prefix string) {
 	message := litter.Sdump(arg)
@@ -133,6 +156,12 @@ func WarnDump(arg interface{}, prefix string) {
 func Error(args ...interface{}) {
 	message := formatMessage(args...)
 	printMessage("ERROR", message)
+}
+
+// Errorf prints an error message with a format and arguments
+func Errorf(format string, args ...interface{}) {
+	msg := fmt.Sprintf(format, args...)
+	Error(msg)
 }
 
 // ErrorDump dumps the argument as an err message with an optional prefix to stderr
@@ -164,6 +193,12 @@ func Fatal(args ...interface{}) {
 	message := formatMessage(args...)
 	printMessage("FATAL", message)
 	OsExit(1)
+}
+
+// Fatalf prints a fatal message with a format and arguments
+func Fatalf(format string, args ...interface{}) {
+	msg := fmt.Sprintf(format, args...)
+	Fatal(msg)
 }
 
 // CheckError checks if the error is not nil and if that's the case, it will print a fatal message and exits the

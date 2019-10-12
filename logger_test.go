@@ -31,6 +31,24 @@ func Test_Debug_Enabled(t *testing.T) {
 
 }
 
+func Test_Debugf_Enabled(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.DebugMode = true
+
+	log.Debugf("hello %d", 2)
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "test | DEBUG | hello 2\n", actualStdOut, "stdout")
+	assert.Equal(t, "", actualStdErr, "stderr")
+
+}
+
 func Test_Debug_Disabled(t *testing.T) {
 
 	resetLogConfig()
@@ -219,6 +237,22 @@ func Test_Info(t *testing.T) {
 
 }
 
+func Test_Infof(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.Infof("info %d", 2)
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "test | INFO  | info 2\n", actualStdOut, "stdout")
+	assert.Equal(t, "", actualStdErr, "stderr")
+
+}
+
 func Test_InfoSeparator(t *testing.T) {
 
 	resetLogConfig()
@@ -287,6 +321,22 @@ func Test_Warn(t *testing.T) {
 
 }
 
+func Test_Warnf(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.Warnf("warn %d", 2)
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "test | WARN  | warn 2\n", actualStdOut, "stdout")
+	assert.Equal(t, "", actualStdErr, "stderr")
+
+}
+
 func Test_WarnDump_WithoutPrefix(t *testing.T) {
 
 	resetLogConfig()
@@ -336,6 +386,22 @@ func Test_Error(t *testing.T) {
 
 	assert.Equal(t, "", actualStdOut, "stdout")
 	assert.Equal(t, "test | ERROR | error\n", actualStdErr, "stderr")
+
+}
+
+func Test_Errorf(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.Errorf("error %d", 2)
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "", actualStdOut, "stdout")
+	assert.Equal(t, "test | ERROR | error 2\n", actualStdErr, "stderr")
 
 }
 
@@ -419,6 +485,33 @@ func Test_Fatal(t *testing.T) {
 
 	assert.Equal(t, "", actualStdOut, "stdout")
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error\n"), "stderr")
+	assert.Equal(t, 1, got, "exit-code")
+
+}
+
+func Test_Fatalf(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	oldOsExit := log.OsExit
+	defer func() {
+		log.OsExit = oldOsExit
+	}()
+
+	var got int
+	log.OsExit = func(code int) {
+		got = code
+	}
+
+	log.Fatalf("fatal error %d", 2)
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "", actualStdOut, "stdout")
+	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error 2\n"), "stderr")
 	assert.Equal(t, 1, got, "exit-code")
 
 }
