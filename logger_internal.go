@@ -13,6 +13,8 @@ var logMutex = &sync.Mutex{}
 func init() {
 	TimeZone, _ = time.LoadLocation("Europe/Brussels")
 	DebugMode = os.Getenv("DEBUG") == "1"
+	DebugSQLMode = os.Getenv("DEBUG_SQL") == "1"
+	PrintTimestamp = os.Getenv("PRINT_TIMESTAMP") == "1"
 }
 
 func formatMessage(args ...interface{}) string {
