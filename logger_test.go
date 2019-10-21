@@ -13,7 +13,7 @@ import (
 	"github.com/pieterclaerhout/go-log"
 )
 
-func Test_Debug_Enabled(t *testing.T) {
+func TestDebugEnabled(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -31,7 +31,7 @@ func Test_Debug_Enabled(t *testing.T) {
 
 }
 
-func Test_Debugf_Enabled(t *testing.T) {
+func TestDebugfEnabled(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -49,7 +49,7 @@ func Test_Debugf_Enabled(t *testing.T) {
 
 }
 
-func Test_Debug_Disabled(t *testing.T) {
+func TestDebugDisabled(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -67,7 +67,7 @@ func Test_Debug_Disabled(t *testing.T) {
 
 }
 
-func Test_DebugSQL_Enabled_Valid(t *testing.T) {
+func TestDebugSQLEnabledValid(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -86,7 +86,7 @@ func Test_DebugSQL_Enabled_Valid(t *testing.T) {
 
 }
 
-func Test_DebugSQL_Enabled_Error(t *testing.T) {
+func TestDebugSQLEnabledError(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -105,7 +105,7 @@ func Test_DebugSQL_Enabled_Error(t *testing.T) {
 
 }
 
-func Test_DebugSQL_Enabled_Empty(t *testing.T) {
+func TestDebugSQLEnabledEmpty(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -124,7 +124,7 @@ func Test_DebugSQL_Enabled_Empty(t *testing.T) {
 
 }
 
-func Test_DebugSQL_Disabled(t *testing.T) {
+func TestDebugSQLDisabled(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -143,7 +143,7 @@ func Test_DebugSQL_Disabled(t *testing.T) {
 
 }
 
-func Test_DebugSeparator_Disabled(t *testing.T) {
+func TestDebugSeparatorDisabled(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -162,7 +162,7 @@ func Test_DebugSeparator_Disabled(t *testing.T) {
 
 }
 
-func Test_DebugSeparator_Enabled(t *testing.T) {
+func TestDebugSeparatorEnabled(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -181,7 +181,7 @@ func Test_DebugSeparator_Enabled(t *testing.T) {
 
 }
 
-func Test_DebugDump_WithoutPrefix(t *testing.T) {
+func TestDebugDumpWithoutPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -201,7 +201,7 @@ func Test_DebugDump_WithoutPrefix(t *testing.T) {
 
 }
 
-func Test_DebugDump_WithPrefix(t *testing.T) {
+func TestDebugDumpWithPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -221,7 +221,7 @@ func Test_DebugDump_WithPrefix(t *testing.T) {
 
 }
 
-func Test_Info(t *testing.T) {
+func TestInfo(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -237,7 +237,7 @@ func Test_Info(t *testing.T) {
 
 }
 
-func Test_Infof(t *testing.T) {
+func TestInfof(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -253,7 +253,7 @@ func Test_Infof(t *testing.T) {
 
 }
 
-func Test_InfoSeparator(t *testing.T) {
+func TestInfoSeparator(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -269,7 +269,7 @@ func Test_InfoSeparator(t *testing.T) {
 
 }
 
-func Test_InfoDump_WithoutPrefix(t *testing.T) {
+func TestInfoDumpWithoutPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -287,7 +287,7 @@ func Test_InfoDump_WithoutPrefix(t *testing.T) {
 
 }
 
-func Test_InfoDump_WithPrefix(t *testing.T) {
+func TestInfoDumpWithPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -305,7 +305,7 @@ func Test_InfoDump_WithPrefix(t *testing.T) {
 
 }
 
-func Test_Warn(t *testing.T) {
+func TestWarn(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -321,7 +321,7 @@ func Test_Warn(t *testing.T) {
 
 }
 
-func Test_Warnf(t *testing.T) {
+func TestWarnf(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -337,7 +337,7 @@ func Test_Warnf(t *testing.T) {
 
 }
 
-func Test_WarnDump_WithoutPrefix(t *testing.T) {
+func TestWarnDumpWithoutPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -355,7 +355,7 @@ func Test_WarnDump_WithoutPrefix(t *testing.T) {
 
 }
 
-func Test_WarnDump_WithPrefix(t *testing.T) {
+func TestWarnDumpWithPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -373,7 +373,7 @@ func Test_WarnDump_WithPrefix(t *testing.T) {
 
 }
 
-func Test_Error(t *testing.T) {
+func TestError(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -389,7 +389,7 @@ func Test_Error(t *testing.T) {
 
 }
 
-func Test_Errorf(t *testing.T) {
+func TestErrorf(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -405,7 +405,7 @@ func Test_Errorf(t *testing.T) {
 
 }
 
-func Test_ErrorDump_WithoutPrefix(t *testing.T) {
+func TestErrorDumpWithoutPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -423,7 +423,7 @@ func Test_ErrorDump_WithoutPrefix(t *testing.T) {
 
 }
 
-func Test_ErrorDump_WithPrefix(t *testing.T) {
+func TestErrorDumpWithPrefix(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -441,7 +441,7 @@ func Test_ErrorDump_WithPrefix(t *testing.T) {
 
 }
 
-func Test_StackTrace(t *testing.T) {
+func TestStackTrace(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -457,12 +457,12 @@ func Test_StackTrace(t *testing.T) {
 
 }
 
-func Test_FormattedStackTrace(t *testing.T) {
+func TestFormattedStackTrace(t *testing.T) {
 	actual := log.FormattedStackTrace(errors.New("my error"))
 	assert.True(t, strings.HasPrefix(actual, "*errors.fundamental my error\n"))
 }
 
-func Test_Fatal(t *testing.T) {
+func TestFatal(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -489,7 +489,7 @@ func Test_Fatal(t *testing.T) {
 
 }
 
-func Test_Fatalf(t *testing.T) {
+func TestFatalf(t *testing.T) {
 
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
@@ -516,7 +516,7 @@ func Test_Fatalf(t *testing.T) {
 
 }
 
-func Test_CheckError(t *testing.T) {
+func TestCheckError(t *testing.T) {
 
 	type test struct {
 		name             string
@@ -560,7 +560,7 @@ func Test_CheckError(t *testing.T) {
 			actualStdErr := stderr.String()
 
 			assert.Equal(t, tc.expectedStdout, actualStdOut, "stdout")
-			if tc.debug == true {
+			if tc.debug {
 				assert.True(t, strings.HasPrefix(actualStdErr, tc.expectedStderr), "stderr")
 			} else {
 				assert.Equal(t, tc.expectedStderr, actualStdErr, "stderr")

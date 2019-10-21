@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_formatMessage(t *testing.T) {
+func TestFormatMessage(t *testing.T) {
 
 	input := []interface{}{"Hello %s\r\n%d 100%\r\n", "world", 1}
 	expected := "Hello %s\r\n%d 100%\r\n world 1"
@@ -20,7 +20,7 @@ func Test_formatMessage(t *testing.T) {
 
 }
 
-func Test_formatSeparator(t *testing.T) {
+func TestFormatSeparator(t *testing.T) {
 
 	type test struct {
 		name      string
@@ -49,7 +49,7 @@ func Test_formatSeparator(t *testing.T) {
 
 }
 
-func Test_printMessage(t *testing.T) {
+func TestPrintMessage(t *testing.T) {
 
 	type test struct {
 		name           string
@@ -100,7 +100,7 @@ type customError struct {
 	message string
 }
 
-var customErrorCause = errors.New("cause of error")
+var errCustomErrorCause = errors.New("cause of error")
 
 func newCustomError(message string) *customError {
 	return &customError{
@@ -113,15 +113,15 @@ func (e *customError) Error() string {
 }
 
 func (e *customError) Cause() error {
-	return customErrorCause
+	return errCustomErrorCause
 }
 
-func Test_causeOfError(t *testing.T) {
+func TestCauseOfError(t *testing.T) {
 
 	err := newCustomError("custom error")
 	cause := causeOfError(err)
 
-	assert.EqualValues(t, customErrorCause, cause)
+	assert.EqualValues(t, errCustomErrorCause, cause)
 
 }
 

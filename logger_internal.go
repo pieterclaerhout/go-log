@@ -52,7 +52,8 @@ func printMessage(level string, message string) {
 		w = Stderr
 	}
 
-	fmt.Fprint(w, message+"\n")
+	w.Write([]byte(message + "\n"))
+	// fmt.Fprint(w, message+"\n")
 
 	logMutex.Unlock()
 
