@@ -43,7 +43,11 @@ func printMessage(level string, message string) {
 	level = strings.ToUpper(level)
 
 	if PrintTimestamp {
-		formattedTime := time.Now().In(TimeZone).Format(TimeFormat)
+		tstamp := time.Now()
+		if TimeZone != nil {
+			tstamp = tstamp.In(TimeZone)
+		}
+		formattedTime := tstamp.Format(TimeFormat)
 		message = formattedTime + " | " + level + " | " + message
 	}
 
