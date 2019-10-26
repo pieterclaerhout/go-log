@@ -142,6 +142,13 @@ func Warnf(format string, args ...interface{}) {
 	Warn(msg)
 }
 
+// WarnSeparator prints a warning separator
+func WarnSeparator(args ...interface{}) {
+	message := formatMessage(args...)
+	message = formatSeparator(message, "=", 80)
+	printMessage("WARN ", message)
+}
+
 // WarnDump dumps the argument as a warning message with an optional prefix
 func WarnDump(arg interface{}, prefix string) {
 	message := litter.Sdump(arg)
@@ -162,6 +169,13 @@ func Error(args ...interface{}) {
 func Errorf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	Error(msg)
+}
+
+// ErrorSeparator prints an error separator
+func ErrorSeparator(args ...interface{}) {
+	message := formatMessage(args...)
+	message = formatSeparator(message, "=", 80)
+	printMessage("ERROR", message)
 }
 
 // ErrorDump dumps the argument as an err message with an optional prefix to stderr

@@ -337,6 +337,22 @@ func TestWarnf(t *testing.T) {
 
 }
 
+func TestWarnSeparator(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.WarnSeparator("info")
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "test | WARN  | ====[ info ]====================================================================\n", actualStdOut, "stdout")
+	assert.Equal(t, "", actualStdErr, "stderr")
+
+}
+
 func TestWarnDumpWithoutPrefix(t *testing.T) {
 
 	resetLogConfig()
@@ -402,6 +418,22 @@ func TestErrorf(t *testing.T) {
 
 	assert.Equal(t, "", actualStdOut, "stdout")
 	assert.Equal(t, "test | ERROR | error 2\n", actualStdErr, "stderr")
+
+}
+
+func TestErrorSeparator(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.ErrorSeparator("info")
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "", actualStdOut, "stdout")
+	assert.Equal(t, "test | ERROR | ====[ info ]====================================================================\n", actualStdErr, "stderr")
 
 }
 
