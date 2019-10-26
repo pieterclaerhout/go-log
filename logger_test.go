@@ -609,6 +609,7 @@ func TestCheckError(t *testing.T) {
 
 func resetLogConfig() {
 	log.PrintTimestamp = true
+	log.PrintColors = true
 	log.DebugMode = false
 	log.DebugSQLMode = false
 	log.TimeZone, _ = time.LoadLocation("Europe/Brussels")

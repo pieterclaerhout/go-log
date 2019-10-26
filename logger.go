@@ -16,6 +16,9 @@ import (
 // PrintTimestamp indicates if the log messages should include a timestamp or not
 var PrintTimestamp = false
 
+// PrintColors indicates if the messages should be printed in color or not
+var PrintColors = false
+
 // DebugMode indicates if debug information should be printed or not
 //
 // If the environment variable called DEBUG is set to 1, this will default to true.

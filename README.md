@@ -22,6 +22,7 @@ func main() {
     log.DebugMode = true
     log.DebugSQLMode = true
     log.PrintTimestamp = true
+    log.PrintColors = true
     log.TimeFormat = "2006-01-02 15:04:05.000"
 
     myVar := map[string]string{"hello": "world"}

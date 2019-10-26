@@ -6,9 +6,19 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/fatih/color"
 )
 
 var logMutex = &sync.Mutex{}
+
+var colors = map[string]*color.Color{
+	"DEBUG": color.New(color.FgHiBlack),
+	"INFO ": color.New(color.FgHiGreen),
+	"WARN ": color.New(color.FgHiYellow),
+	"ERROR": color.New(color.FgHiRed),
+	"FATAL": color.New(color.FgHiRed),
+}
 
 func init() {
 	TimeZone, _ = time.LoadLocation("Europe/Brussels")
@@ -50,6 +60,11 @@ func printMessage(level string, message string) {
 		formattedTime := tstamp.Format(TimeFormat)
 		message = formattedTime + " | " + level + " | " + message
 	}
+	if PrintColors {
+		if color, ok := colors[level]; ok {
+			message = color.Sprint(message)
+		}
+	}
 
 	w := Stdout
 	if level == "ERROR" || level == "FATAL" {
@@ -57,7 +72,6 @@ func printMessage(level string, message string) {
 	}
 
 	w.Write([]byte(message + "\n"))
-	// fmt.Fprint(w, message+"\n")
 
 	logMutex.Unlock()
 
