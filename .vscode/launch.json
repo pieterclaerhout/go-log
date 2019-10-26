@@ -1,0 +1,14 @@
+{
+    "Version": "2.0.0",
+    "configurations": [
+        {
+            "name": "Debug Executable",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/go-log",
+            "env": {},
+            "args": []
+        }
+    ]
+}

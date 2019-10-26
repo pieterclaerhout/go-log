@@ -1,0 +1,95 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "go-log | build",
+            "command": "go-james build -v",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | build darwin/amd64",
+            "command": "go-james build -v --goos=darwin --goarch=amd64",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | build linux/amd64",
+            "command": "go-james build -v --goos=linux --goarch=amd64",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | build windows/amd64",
+            "command": "go-james build -v --goos=windows --goarch=amd64",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | clean",
+            "command": "go-james clean",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | tests",
+            "command": "go-james test",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | run",
+            "command": "go-james run",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | install",
+            "command": "go-james install",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | uninstall",
+            "command": "go-james uninstall",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
+            "label": "go-log | run (debug)",
+            "command": "DEBUG=1 go-james run",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        }
+    ]
+}
