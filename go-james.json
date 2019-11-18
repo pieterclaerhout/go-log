@@ -7,7 +7,7 @@
         "main_package": "github.com/pieterclaerhout/go-log/cmd/go-log"
     },
     "build": {
-        "ouput_path": "build",
+        "output_path": "build",
         "ld_flags": [
             "-s",
             "-w"

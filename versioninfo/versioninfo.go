@@ -7,7 +7,7 @@ var ProjectName string = "go-log"
 var ProjectDescription string = "go-log"
 
 // ProjectCopyright contains the copyright for the project
-var ProjectCopyright string = ""
+var ProjectCopyright string = "Copyright Pieter Claerhout"
 
 // Version contains the version of the app
 var Version string = "1.0.0"
