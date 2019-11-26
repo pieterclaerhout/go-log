@@ -13,28 +13,28 @@ func main() {
 
 	myVar := map[string]string{"hello": "world"}
 
-	log.Debug("arg1", "arg2")
-	log.Debugf("arg1 %d", 1)
-	log.DebugDump(myVar, "prefix")
-	log.DebugSeparator("title")
-	log.DebugSQL("select * from mytable")
+	log.Debug("debug arg1", "debug arg2")
+	log.Debugf("debug arg1 %d", 1)
+	log.DebugDump(myVar, "debug prefix")
+	log.DebugSeparator("debug title")
+	log.DebugSQL("select * from debug_mytable")
 
-	log.Info("arg1", "arg2")
-	log.Infof("arg1 %d", 1)
-	log.InfoDump(myVar, "prefix")
-	log.InfoSeparator("title")
+	log.Info("info arg1", "info arg2")
+	log.Infof("info arg1 %d", 1)
+	log.InfoDump(myVar, "info prefix")
+	log.InfoSeparator("info title")
 
-	log.Warn("arg1", "arg2")
-	log.Warnf("arg1 %d", 1)
-	log.WarnDump(myVar, "prefix")
-	log.WarnSeparator("title")
+	log.Warn("warn arg1", "warn arg2")
+	log.Warnf("warn arg1 %d", 1)
+	log.WarnDump(myVar, "warn prefix")
+	log.WarnSeparator("warn title")
 
-	log.Error("arg1", "arg2")
-	log.Errorf("arg1 %d", 1)
-	log.ErrorDump(myVar, "prefix")
-	log.ErrorSeparator("title")
+	log.Error("error arg1", "error arg2")
+	log.Errorf("error arg1 %d", 1)
+	log.ErrorDump(myVar, "error prefix")
+	log.ErrorSeparator("error title")
 
-	log.Fatal("arg1", "arg2")
-	log.Fatalf("arg1 %d", 1)
+	log.Fatal("fatal arg1", "fatal arg2")
+	log.Fatalf("fatal arg1 %d", 1)
 
 }

@@ -26,8 +26,8 @@ func TestDebugEnabled(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | DEBUG | debug\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | DEBUG | debug\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -44,8 +44,8 @@ func TestDebugfEnabled(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | DEBUG | hello 2\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | DEBUG | hello 2\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -62,8 +62,8 @@ func TestDebugDisabled(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -81,8 +81,8 @@ func TestDebugSQLEnabledValid(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | DEBUG | SELECT *\nFROM mytable\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | DEBUG | SELECT *\nFROM mytable\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -100,8 +100,8 @@ func TestDebugSQLEnabledError(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | Invalid SQL statement\n", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "test | ERROR | Invalid SQL statement\n", actualStdErr)
 
 }
 
@@ -119,8 +119,8 @@ func TestDebugSQLEnabledEmpty(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | DEBUG | \n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | DEBUG | \n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -138,8 +138,8 @@ func TestDebugSQLDisabled(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -157,8 +157,8 @@ func TestDebugSeparatorDisabled(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -176,8 +176,8 @@ func TestDebugSeparatorEnabled(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | DEBUG | ====[ debug ]===================================================================\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | DEBUG | ====[ debug ]===================================================================\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -196,8 +196,8 @@ func TestDebugDumpWithoutPrefix(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | DEBUG | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | DEBUG | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -211,13 +211,13 @@ func TestDebugDumpWithPrefix(t *testing.T) {
 
 	data := map[string]string{"hello": "world"}
 
-	log.DebugDump(data, "prefix | ")
+	log.DebugDump(data, "dprefix | ")
 
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | DEBUG | prefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | DEBUG | dprefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -232,8 +232,8 @@ func TestInfo(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | INFO  | info 100%\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | INFO  | info 100%\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -248,8 +248,8 @@ func TestInfof(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | INFO  | info 2\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | INFO  | info 2\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -264,8 +264,8 @@ func TestInfoSeparator(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | INFO  | ====[ info ]====================================================================\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | INFO  | ====[ info ]====================================================================\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -282,8 +282,8 @@ func TestInfoDumpWithoutPrefix(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | INFO  | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | INFO  | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -295,13 +295,13 @@ func TestInfoDumpWithPrefix(t *testing.T) {
 
 	data := map[string]string{"hello": "world"}
 
-	log.InfoDump(data, "prefix | ")
+	log.InfoDump(data, "iprefix | ")
 
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | INFO  | prefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | INFO  | iprefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -316,8 +316,8 @@ func TestWarn(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | WARN  | warn\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | WARN  | warn\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -332,8 +332,8 @@ func TestWarnf(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | WARN  | warn 2\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | WARN  | warn 2\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -348,8 +348,8 @@ func TestWarnSeparator(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | WARN  | ====[ info ]====================================================================\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | WARN  | ====[ info ]====================================================================\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -366,8 +366,8 @@ func TestWarnDumpWithoutPrefix(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | WARN  | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | WARN  | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -379,13 +379,13 @@ func TestWarnDumpWithPrefix(t *testing.T) {
 
 	data := map[string]string{"hello": "world"}
 
-	log.WarnDump(data, "prefix | ")
+	log.WarnDump(data, "wprefix | ")
 
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "test | WARN  | prefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut, "stdout")
-	assert.Equal(t, "", actualStdErr, "stderr")
+	assert.Equal(t, "test | WARN  | wprefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdOut)
+	assert.Equal(t, "", actualStdErr)
 
 }
 
@@ -400,8 +400,8 @@ func TestError(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | error\n", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "test | ERROR | error\n", actualStdErr)
 
 }
 
@@ -416,8 +416,8 @@ func TestErrorf(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | error 2\n", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "test | ERROR | error 2\n", actualStdErr)
 
 }
 
@@ -432,8 +432,8 @@ func TestErrorSeparator(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | ====[ info ]====================================================================\n", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "test | ERROR | ====[ info ]====================================================================\n", actualStdErr)
 
 }
 
@@ -450,8 +450,8 @@ func TestErrorDumpWithoutPrefix(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "test | ERROR | map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdErr)
 
 }
 
@@ -463,13 +463,13 @@ func TestErrorDumpWithPrefix(t *testing.T) {
 
 	data := map[string]string{"hello": "world"}
 
-	log.ErrorDump(data, "prefix | ")
+	log.ErrorDump(data, "eprefix | ")
 
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | prefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdErr, "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.Equal(t, "test | ERROR | eprefix |  map[string]string{\n  \"hello\": \"world\",\n}\n", actualStdErr)
 
 }
 
@@ -484,8 +484,8 @@ func TestStackTrace(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | *errors.fundamental my error\n"), "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | *errors.fundamental my error\n"))
 
 }
 
@@ -515,8 +515,8 @@ func TestFatal(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error\n"), "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error\n"))
 	assert.Equal(t, 1, got, "exit-code")
 
 }
@@ -542,8 +542,8 @@ func TestFatalf(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error 2\n"), "stderr")
+	assert.Equal(t, "", actualStdOut)
+	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error 2\n"))
 	assert.Equal(t, 1, got, "exit-code")
 
 }
@@ -591,11 +591,11 @@ func TestCheckError(t *testing.T) {
 			actualStdOut := stdout.String()
 			actualStdErr := stderr.String()
 
-			assert.Equal(t, tc.expectedStdout, actualStdOut, "stdout")
+			assert.Equal(t, tc.expectedStdout, actualStdOut)
 			if tc.debug {
-				assert.True(t, strings.HasPrefix(actualStdErr, tc.expectedStderr), "stderr")
+				assert.True(t, strings.HasPrefix(actualStdErr, tc.expectedStderr))
 			} else {
-				assert.Equal(t, tc.expectedStderr, actualStdErr, "stderr")
+				assert.Equal(t, tc.expectedStderr, actualStdErr)
 			}
 
 			if tc.expectedExitCode > 0 {
