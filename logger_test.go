@@ -517,7 +517,7 @@ func TestFatal(t *testing.T) {
 
 	assert.Equal(t, "", actualStdOut)
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error\n"))
-	assert.Equal(t, 1, got, "exit-code")
+	assert.Equal(t, 1, got)
 
 }
 
@@ -544,7 +544,7 @@ func TestFatalf(t *testing.T) {
 
 	assert.Equal(t, "", actualStdOut)
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error 2\n"))
-	assert.Equal(t, 1, got, "exit-code")
+	assert.Equal(t, 1, got)
 
 }
 
@@ -599,7 +599,7 @@ func TestCheckError(t *testing.T) {
 			}
 
 			if tc.expectedExitCode > 0 {
-				assert.Equal(t, 1, got, "exit-code")
+				assert.Equal(t, 1, got)
 			}
 
 		})
