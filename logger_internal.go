@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/fatih/color"
+	"github.com/mattn/go-colorable"
 )
 
 var logMutex = &sync.Mutex{}
@@ -48,8 +49,6 @@ func formatSeparator(message string, separator string, length int) string {
 
 func printMessage(level string, message string) {
 
-	logMutex.Lock()
-
 	level = strings.ToUpper(level)
 
 	if PrintTimestamp {
@@ -60,20 +59,21 @@ func printMessage(level string, message string) {
 		formattedTime := tstamp.Format(TimeFormat)
 		message = formattedTime + " | " + level + " | " + message
 	}
-	if PrintColors {
-		if color, ok := colors[level]; ok {
-			message = color.Sprint(message)
-		}
-	}
 
 	w := Stdout
 	if level == "ERROR" || level == "FATAL" {
 		w = Stderr
 	}
 
-	w.Write([]byte(message + "\n"))
+	if PrintColors {
+		cw := colorable.NewColorable(w)
+		if c, ok := colors[level]; ok {
+			c.Fprintln(cw, message)
+			return
+		}
+	}
 
-	logMutex.Unlock()
+	w.Write([]byte(message + "\n"))
 
 }
 

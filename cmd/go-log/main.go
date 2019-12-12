@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+
 	log.DebugMode = true
 	log.DebugSQLMode = true
 	log.PrintTimestamp = true
