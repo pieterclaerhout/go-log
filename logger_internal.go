@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/mattn/go-colorable"
 )
 
 var logMutex = &sync.Mutex{}
@@ -66,9 +65,9 @@ func printMessage(level string, message string) {
 	}
 
 	if PrintColors {
-		cw := colorable.NewColorable(w)
+		// cw := colorable.NewColorable(w)
 		if c, ok := colors[level]; ok {
-			c.Fprintln(cw, message)
+			c.Fprintln(w, message)
 			return
 		}
 	}

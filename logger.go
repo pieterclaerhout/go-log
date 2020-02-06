@@ -2,6 +2,7 @@ package log
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"strings"
 	"time"
@@ -31,10 +32,10 @@ var DebugSQLMode = false
 var TimeZone *time.Location
 
 // Stdout is the writer to where the stdout messages should be written (defaults to os.Stdout)
-var Stdout *os.File = os.Stdout
+var Stdout io.Writer = os.Stdout
 
 // Stderr is the writer to where the stderr messages should be written (defaults to os.Stderr)
-var Stderr *os.File = os.Stderr
+var Stderr io.Writer = os.Stderr
 
 // DefaultTimeFormat is the default format to use for the timestamps
 var DefaultTimeFormat = "2006-01-02 15:04:05.000"
@@ -222,11 +223,18 @@ func Fatalf(format string, args ...interface{}) {
 //
 // If DebugMode is enabled a stack trace will also be printed to stderr
 func CheckError(err error) {
-	if err != nil {
-		printMessage("FATAL", err.Error())
-		if DebugMode {
-			StackTrace(err)
-		}
-		OsExit(1)
+
+	if err == nil {
+		return
 	}
+
+	msg := err.Error()
+	if DebugMode {
+		msg = formatMessage(FormattedStackTrace(err))
+	}
+
+	printMessage("FATAL", msg)
+
+	OsExit(1)
+
 }

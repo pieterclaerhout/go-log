@@ -564,7 +564,7 @@ func TestCheckError(t *testing.T) {
 		{"nil-debug-color", nil, true, "", "", -1},
 
 		{"err-release-nocolor", errors.New("test"), false, "", "test | FATAL | test\n", 1},
-		{"err-debug-nocolor", errors.New("test"), true, "", "test | FATAL | test\ntest | ERROR | *errors.fundamental test\n", 1},
+		{"err-debug-nocolor", errors.New("test"), true, "", "test | FATAL | *errors.fundamental test\n", 1},
 	}
 
 	for _, tc := range tests {
@@ -593,7 +593,7 @@ func TestCheckError(t *testing.T) {
 
 			assert.Equal(t, tc.expectedStdout, actualStdOut)
 			if tc.debug {
-				assert.True(t, strings.HasPrefix(actualStdErr, tc.expectedStderr))
+				assert.True(t, strings.HasPrefix(actualStdErr, tc.expectedStderr), actualStdErr)
 			} else {
 				assert.Equal(t, tc.expectedStderr, actualStdErr)
 			}
