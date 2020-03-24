@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -93,35 +92,6 @@ func TestPrintMessage(t *testing.T) {
 
 		})
 	}
-
-}
-
-type customError struct {
-	message string
-}
-
-var errCustomErrorCause = errors.New("cause of error")
-
-func newCustomError(message string) *customError {
-	return &customError{
-		message: message,
-	}
-}
-
-func (e *customError) Error() string {
-	return e.message
-}
-
-func (e *customError) Cause() error {
-	return errCustomErrorCause
-}
-
-func TestCauseOfError(t *testing.T) {
-
-	err := newCustomError("custom error")
-	cause := causeOfError(err)
-
-	assert.EqualValues(t, errCustomErrorCause, cause)
 
 }
 

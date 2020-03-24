@@ -4,13 +4,10 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/fatih/color"
 )
-
-var logMutex = &sync.Mutex{}
 
 var colors = map[string]*color.Color{
 	"DEBUG": color.New(color.FgHiBlack),
@@ -65,7 +62,6 @@ func printMessage(level string, message string) {
 	}
 
 	if PrintColors {
-		// cw := colorable.NewColorable(w)
 		if c, ok := colors[level]; ok {
 			c.Fprintln(w, message)
 			return
@@ -73,23 +69,5 @@ func printMessage(level string, message string) {
 	}
 
 	w.Write([]byte(message + "\n"))
-
-}
-
-func causeOfError(err error) error {
-
-	type causer interface {
-		Cause() error
-	}
-
-	for err != nil {
-		cause, ok := err.(causer)
-		if !ok {
-			break
-		}
-		err = cause.Cause()
-	}
-
-	return err
 
 }

@@ -485,13 +485,36 @@ func TestStackTrace(t *testing.T) {
 	actualStdErr := stderr.String()
 
 	assert.Equal(t, "", actualStdOut)
-	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | *errors.fundamental my error\n"))
+	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | my error\n"))
+
+}
+
+type CustomError struct{}
+
+func (m *CustomError) Error() string {
+	return "boom"
+}
+
+func Test_StackTraceCustom(t *testing.T) {
+
+	resetLogConfig()
+	stdout, stderr := redirectOutput()
+	defer resetLogOutput()
+
+	log.StackTrace(&CustomError{})
+
+	actualStdOut := stdout.String()
+	actualStdErr := stderr.String()
+
+	assert.Equal(t, "", actualStdOut, "stdout")
+	t.Log(actualStdErr)
+	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | boom\n"), "stderr")
 
 }
 
 func TestFormattedStackTrace(t *testing.T) {
 	actual := log.FormattedStackTrace(errors.New("my error"))
-	assert.True(t, strings.HasPrefix(actual, "*errors.fundamental my error\n"))
+	assert.True(t, strings.HasPrefix(actual, "my error\n"))
 }
 
 func TestFatal(t *testing.T) {
@@ -564,7 +587,7 @@ func TestCheckError(t *testing.T) {
 		{"nil-debug-color", nil, true, "", "", -1},
 
 		{"err-release-nocolor", errors.New("test"), false, "", "test | FATAL | test\n", 1},
-		{"err-debug-nocolor", errors.New("test"), true, "", "test | FATAL | *errors.fundamental test\n", 1},
+		{"err-debug-nocolor", errors.New("test"), true, "", "test | FATAL | test\n", 1},
 	}
 
 	for _, tc := range tests {

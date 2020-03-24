@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-errors/errors"
+	"github.com/pkg/errors"
 	"github.com/sanity-io/litter"
 
 	"github.com/pieterclaerhout/go-formatter"
@@ -199,10 +199,21 @@ func StackTrace(err error) {
 
 // FormattedStackTrace returns a formatted stacktrace for err
 func FormattedStackTrace(err error) string {
-	if cause := causeOfError(err); cause != nil {
+
+	if cause := errors.Cause(err); cause != nil {
 		err = cause
 	}
-	return strings.TrimSpace(errors.Wrap(err, 2).ErrorStack())
+
+	type stackTracer interface {
+		StackTrace() errors.StackTrace
+	}
+
+	if err, ok := err.(stackTracer); ok {
+		return strings.TrimSpace(fmt.Sprintf("%+v", err))
+	}
+
+	return strings.TrimSpace(fmt.Sprintf("%+v", err))
+
 }
 
 // Fatal logs a fatal error message to stdout and exits the program with exit code 1
