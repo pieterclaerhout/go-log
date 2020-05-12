@@ -65,7 +65,8 @@ func printMessage(level string, message string) {
 		color.NoColor = false
 		if c, ok := colors[level]; ok {
 			c.EnableColor()
-			c.Fprintln(w, message)
+			c.Fprint(w, message)
+			w.Write([]byte("\n"))
 			return
 		}
 	}

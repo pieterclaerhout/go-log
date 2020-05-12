@@ -7,10 +7,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pieterclaerhout/go-log"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
-
-	"github.com/pieterclaerhout/go-log"
 )
 
 func TestDebugEnabled(t *testing.T) {
@@ -20,6 +19,7 @@ func TestDebugEnabled(t *testing.T) {
 	defer resetLogOutput()
 
 	log.DebugMode = true
+	log.PrintColors = false
 
 	log.Debug("debug")
 
@@ -38,6 +38,7 @@ func TestDebugfEnabled(t *testing.T) {
 	defer resetLogOutput()
 
 	log.DebugMode = true
+	log.PrintColors = false
 
 	log.Debugf("hello %d", 2)
 
@@ -75,6 +76,7 @@ func TestDebugSQLEnabledValid(t *testing.T) {
 
 	log.DebugMode = true
 	log.DebugSQLMode = true
+	log.PrintColors = false
 
 	log.DebugSQL("select * from mytable")
 
@@ -94,6 +96,7 @@ func TestDebugSQLEnabledError(t *testing.T) {
 
 	log.DebugMode = true
 	log.DebugSQLMode = true
+	log.PrintColors = false
 
 	log.DebugSQL("throw-error")
 
@@ -113,6 +116,7 @@ func TestDebugSQLEnabledEmpty(t *testing.T) {
 
 	log.DebugMode = true
 	log.DebugSQLMode = true
+	log.PrintColors = false
 
 	log.DebugSQL("")
 
@@ -170,6 +174,7 @@ func TestDebugSeparatorEnabled(t *testing.T) {
 
 	log.DebugMode = true
 	log.DebugSQLMode = true
+	log.PrintColors = false
 
 	log.DebugSeparator("debug")
 
@@ -188,6 +193,7 @@ func TestDebugDumpWithoutPrefix(t *testing.T) {
 	defer resetLogOutput()
 
 	log.DebugMode = true
+	log.PrintColors = false
 
 	data := map[string]string{"hello": "world"}
 
@@ -208,6 +214,7 @@ func TestDebugDumpWithPrefix(t *testing.T) {
 	defer resetLogOutput()
 
 	log.DebugMode = true
+	log.PrintColors = false
 
 	data := map[string]string{"hello": "world"}
 
@@ -227,6 +234,8 @@ func TestInfo(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	log.Info("info 100%")
 
 	actualStdOut := stdout.String()
@@ -242,6 +251,8 @@ func TestInfof(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	log.Infof("info %d", 2)
 
@@ -259,6 +270,8 @@ func TestInfoSeparator(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	log.InfoSeparator("info")
 
 	actualStdOut := stdout.String()
@@ -274,6 +287,8 @@ func TestInfoDumpWithoutPrefix(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	data := map[string]string{"hello": "world"}
 
@@ -293,6 +308,8 @@ func TestInfoDumpWithPrefix(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	data := map[string]string{"hello": "world"}
 
 	log.InfoDump(data, "iprefix | ")
@@ -311,6 +328,8 @@ func TestWarn(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	log.Warn("warn")
 
 	actualStdOut := stdout.String()
@@ -326,6 +345,8 @@ func TestWarnf(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	log.Warnf("warn %d", 2)
 
@@ -343,6 +364,8 @@ func TestWarnSeparator(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	log.WarnSeparator("info")
 
 	actualStdOut := stdout.String()
@@ -358,6 +381,8 @@ func TestWarnDumpWithoutPrefix(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	data := map[string]string{"hello": "world"}
 
@@ -377,6 +402,8 @@ func TestWarnDumpWithPrefix(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	data := map[string]string{"hello": "world"}
 
 	log.WarnDump(data, "wprefix | ")
@@ -395,6 +422,8 @@ func TestError(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	log.Error("error")
 
 	actualStdOut := stdout.String()
@@ -410,6 +439,8 @@ func TestErrorf(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	log.Errorf("error %d", 2)
 
@@ -427,6 +458,8 @@ func TestErrorSeparator(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	log.ErrorSeparator("info")
 
 	actualStdOut := stdout.String()
@@ -442,6 +475,8 @@ func TestErrorDumpWithoutPrefix(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	data := map[string]string{"hello": "world"}
 
@@ -461,6 +496,8 @@ func TestErrorDumpWithPrefix(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	data := map[string]string{"hello": "world"}
 
 	log.ErrorDump(data, "eprefix | ")
@@ -478,6 +515,8 @@ func TestStackTrace(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	log.StackTrace(errors.New("my error"))
 
@@ -501,6 +540,8 @@ func Test_StackTraceCustom(t *testing.T) {
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
 
+	log.PrintColors = false
+
 	log.StackTrace(&CustomError{})
 
 	actualStdOut := stdout.String()
@@ -522,6 +563,8 @@ func TestFatal(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	oldOsExit := log.OsExit
 	defer func() {
@@ -549,6 +592,8 @@ func TestFatalf(t *testing.T) {
 	resetLogConfig()
 	stdout, stderr := redirectOutput()
 	defer resetLogOutput()
+
+	log.PrintColors = false
 
 	oldOsExit := log.OsExit
 	defer func() {
@@ -608,6 +653,7 @@ func TestCheckError(t *testing.T) {
 			}
 
 			log.DebugMode = tc.debug
+			log.PrintColors = false
 
 			log.CheckError(tc.err)
 

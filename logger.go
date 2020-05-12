@@ -7,10 +7,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pieterclaerhout/go-formatter"
 	"github.com/pkg/errors"
 	"github.com/sanity-io/litter"
-
-	"github.com/pieterclaerhout/go-formatter"
 )
 
 // PrintTimestamp indicates if the log messages should include a timestamp or not

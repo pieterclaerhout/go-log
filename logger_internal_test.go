@@ -48,7 +48,7 @@ func TestFormatSeparator(t *testing.T) {
 
 }
 
-func TestPrintMessage(t *testing.T) {
+func TestPrintMessage_NoColor(t *testing.T) {
 
 	type test struct {
 		name           string
@@ -81,6 +81,55 @@ func TestPrintMessage(t *testing.T) {
 			defer resetLogOutput()
 
 			PrintTimestamp = tc.printTimestamp
+			PrintColors = false
+
+			printMessage(tc.level, tc.message)
+
+			actualStdOut := stdout.String()
+			actualStdErr := stderr.String()
+
+			assert.Equal(t, tc.expectedStdout, actualStdOut, "stdout")
+			assert.Equal(t, tc.expectedStderr, actualStdErr, "stderr")
+
+		})
+	}
+
+}
+
+func TestPrintMessage_Color(t *testing.T) {
+
+	type test struct {
+		name           string
+		level          string
+		message        string
+		printTimestamp bool
+		expectedStdout string
+		expectedStderr string
+	}
+
+	var tests = []test{
+		{"debug-1", "debug", "message", false, "\x1b[90mmessage\x1b[0m\n", ""},
+		{"debug-2", "debug", "message", true, "\x1b[90m" + TestingTimeFormat + " | DEBUG | message\x1b[0m\n", ""},
+
+		{"info-1", "info ", "message", false, "\x1b[92mmessage\x1b[0m\n", ""},
+		{"info-2", "info ", "message", true, "\x1b[92m" + TestingTimeFormat + " | INFO  | message\x1b[0m\n", ""},
+
+		{"warn-1", "warn ", "message", false, "\x1b[93mmessage\x1b[0m\n", ""},
+		{"warn-2", "warn ", "message", true, "\x1b[93m" + TestingTimeFormat + " | WARN  | message\x1b[0m\n", ""},
+
+		{"error-1", "error", "message", false, "", "\x1b[91mmessage\x1b[0m\n"},
+		{"error-2", "error", "message", true, "", "\x1b[91m" + TestingTimeFormat + " | ERROR | message\x1b[0m\n"},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+
+			resetLogConfig()
+			stdout, stderr := redirectOutput()
+			defer resetLogOutput()
+
+			PrintTimestamp = tc.printTimestamp
+			PrintColors = true
 
 			printMessage(tc.level, tc.message)
 
