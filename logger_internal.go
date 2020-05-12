@@ -2,6 +2,7 @@ package log
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"strings"
 	"time"
@@ -18,10 +19,14 @@ var colors = map[string]*color.Color{
 }
 
 func init() {
+
 	TimeZone, _ = time.LoadLocation("Europe/Brussels")
 	DebugMode = os.Getenv("DEBUG") == "1"
 	DebugSQLMode = os.Getenv("DEBUG_SQL") == "1"
 	PrintTimestamp = os.Getenv("PRINT_TIMESTAMP") == "1"
+
+	color.NoColor = false
+
 }
 
 func formatMessage(args ...interface{}) string {
@@ -48,29 +53,48 @@ func printMessage(level string, message string) {
 	level = strings.ToUpper(level)
 
 	if PrintTimestamp {
-		tstamp := time.Now()
-		if TimeZone != nil {
-			tstamp = tstamp.In(TimeZone)
-		}
-		formattedTime := tstamp.Format(TimeFormat)
-		message = formattedTime + " | " + level + " | " + message
-	}
-
-	w := Stdout
-	if level == "ERROR" || level == "FATAL" {
-		w = Stderr
+		message = addTimestampToMessage(level, message)
 	}
 
 	if PrintColors {
-		color.NoColor = false
-		if c, ok := colors[level]; ok {
-			c.EnableColor()
-			c.Fprint(w, message)
-			w.Write([]byte("\n"))
-			return
-		}
+		printColoredMessage(level, message)
+	} else {
+		printNonColoredMessage(level, message)
 	}
 
-	w.Write([]byte(message + "\n"))
+}
 
+func printNonColoredMessage(level string, message string) {
+	w := writerForLevel(level)
+	w.Write([]byte(message + "\n"))
+}
+
+func printColoredMessage(level string, message string) {
+	w := writerForLevel(level)
+	if c, ok := colors[level]; ok {
+		c.EnableColor()
+		c.Fprint(w, message)
+		w.Write([]byte("\n"))
+	}
+}
+
+func addTimestampToMessage(level string, message string) string {
+
+	tstamp := time.Now()
+	if TimeZone != nil {
+		tstamp = tstamp.In(TimeZone)
+	}
+
+	formattedTime := tstamp.Format(TimeFormat)
+	message = formattedTime + " | " + level + " | " + message
+
+	return message
+
+}
+
+func writerForLevel(level string) io.Writer {
+	if level == "ERROR" || level == "FATAL" {
+		return Stderr
+	}
+	return Stdout
 }
