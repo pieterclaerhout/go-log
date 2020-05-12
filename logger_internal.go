@@ -62,7 +62,9 @@ func printMessage(level string, message string) {
 	}
 
 	if PrintColors {
+		color.NoColor = false
 		if c, ok := colors[level]; ok {
+			c.EnableColor()
 			c.Fprintln(w, message)
 			return
 		}
