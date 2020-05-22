@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"runtime"
 	"strings"
 	"time"
 
@@ -56,7 +57,7 @@ func printMessage(level string, message string) {
 		message = addTimestampToMessage(level, message)
 	}
 
-	if PrintColors {
+	if PrintColors && runtime.GOOS != "windows" {
 		printColoredMessage(level, message)
 	} else {
 		printNonColoredMessage(level, message)
