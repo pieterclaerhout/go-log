@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/pieterclaerhout/go-formatter"
 	"github.com/pkg/errors"
+	"github.com/rotisserie/eris"
 	"github.com/sanity-io/litter"
 )
 
@@ -203,15 +203,10 @@ func FormattedStackTrace(err error) string {
 		err = cause
 	}
 
-	type stackTracer interface {
-		StackTrace() errors.StackTrace
-	}
-
-	if err, ok := err.(stackTracer); ok {
-		return strings.TrimSpace(fmt.Sprintf("%+v", err))
-	}
-
-	return strings.TrimSpace(fmt.Sprintf("%+v", err))
+	return eris.ToCustomString(eris.Wrap(err, err.Error()), eris.NewDefaultStringFormat(eris.FormatOptions{
+		WithTrace:    true,
+		WithExternal: false,
+	}))
 
 }
 

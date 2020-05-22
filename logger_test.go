@@ -548,7 +548,6 @@ func Test_StackTraceCustom(t *testing.T) {
 	actualStdErr := stderr.String()
 
 	assert.Equal(t, "", actualStdOut, "stdout")
-	t.Log(actualStdErr)
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | boom\n"), "stderr")
 
 }

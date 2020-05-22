@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/pieterclaerhout/go-log"
+	"github.com/pkg/errors"
 )
 
 func main() {
@@ -34,6 +35,9 @@ func main() {
 	log.Errorf("error arg1 %d", 1)
 	log.ErrorDump(myVar, "error prefix")
 	log.ErrorSeparator("error title")
+	log.Error(errors.New("error"))
+
+	log.StackTrace(errors.New("error with stack trace"))
 
 	log.Fatal("fatal arg1", "fatal arg2")
 	log.Fatalf("fatal arg1 %d", 1)
