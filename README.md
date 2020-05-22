@@ -61,7 +61,7 @@ func main() {
 }
 ```
 
-## Environmnet variables
+## Environment variables
 
 The defaults are taken from the environment variables:
 
