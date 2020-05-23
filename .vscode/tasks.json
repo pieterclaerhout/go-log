@@ -65,6 +65,15 @@
             ]
         },
         {
+            "label": "go-log | staticcheck",
+            "command": "go-james staticcheck",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [
+                "$go"
+            ]
+        },
+        {
             "label": "go-log | install",
             "command": "go-james install",
             "type": "shell",

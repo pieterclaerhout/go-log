@@ -16,7 +16,8 @@
         "ld_flags_linux": [],
         "ld_flags_windows": [],
         "extra_args": [
-            "-trimpath"
+            "-trimpath",
+            "-race"
         ]
     },
     "package": {
@@ -27,5 +28,8 @@
     },
     "test": {
         "extra_args": []
+    },
+    "staticcheck": {
+        "checks": ["all", "-ST1005", "-ST1000"]
     }
 }
