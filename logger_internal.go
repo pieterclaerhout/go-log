@@ -6,6 +6,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/fatih/color"
@@ -18,6 +19,8 @@ var colors = map[string]*color.Color{
 	"ERROR": color.New(color.FgHiRed),
 	"FATAL": color.New(color.FgHiRed),
 }
+
+var mutex sync.Mutex
 
 func init() {
 
@@ -73,6 +76,8 @@ func printNonColoredMessage(level string, message string) {
 func printColoredMessage(level string, message string) {
 	w := writerForLevel(level)
 	if c, ok := colors[level]; ok {
+		mutex.Lock()
+		defer mutex.Unlock()
 		c.EnableColor()
 		c.Fprint(w, message)
 		w.Write([]byte("\n"))
