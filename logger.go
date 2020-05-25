@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/pieterclaerhout/go-formatter"
@@ -203,10 +204,30 @@ func FormattedStackTrace(err error) string {
 		err = cause
 	}
 
-	return eris.ToCustomString(eris.Wrap(err, err.Error()), eris.NewDefaultStringFormat(eris.FormatOptions{
+	result := eris.ToCustomString(eris.Wrap(err, err.Error()), eris.NewDefaultStringFormat(eris.FormatOptions{
 		WithTrace:    true,
 		WithExternal: false,
+		InvertTrace:  true,
 	}))
+
+	resultLines := strings.Split(result, "\n")
+
+	result = ""
+	for idx, line := range resultLines {
+		if strings.Contains(line, "go-log.") {
+			continue
+		}
+		if idx == 0 {
+			result += fmt.Sprintf("%s\n", line)
+			continue
+		}
+		lineParts := strings.SplitN(line, ":", 2)
+		if len(lineParts) == 2 {
+			result += fmt.Sprintf("%-50s %s\n", lineParts[0], lineParts[1])
+		}
+	}
+
+	return strings.TrimSuffix(result, "\n")
 
 }
 

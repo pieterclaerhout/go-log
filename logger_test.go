@@ -525,6 +525,7 @@ func TestStackTrace(t *testing.T) {
 
 	assert.Equal(t, "", actualStdOut)
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | my error\n"))
+	assert.Equal(t, "test | ERROR | my error\n\tgo-log_test.TestStackTrace                        /Users/pclaerhout/Downloads/JonoFotografie/go-log/logger_test.go:521\n", actualStdErr)
 
 }
 
@@ -548,13 +549,13 @@ func Test_StackTraceCustom(t *testing.T) {
 	actualStdErr := stderr.String()
 
 	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | boom\n"), "stderr")
+	assert.Equal(t, "test | ERROR | boom\n\tgo-log_test.Test_StackTraceCustom                 /Users/pclaerhout/Downloads/JonoFotografie/go-log/logger_test.go:546\n", actualStdErr)
 
 }
 
 func TestFormattedStackTrace(t *testing.T) {
 	actual := log.FormattedStackTrace(errors.New("my error"))
-	assert.True(t, strings.HasPrefix(actual, "my error\n"))
+	assert.Equal(t, "my error\n\tgo-log_test.TestFormattedStackTrace               /Users/pclaerhout/Downloads/JonoFotografie/go-log/logger_test.go:557", actual)
 }
 
 func TestFatal(t *testing.T) {
@@ -581,7 +582,7 @@ func TestFatal(t *testing.T) {
 	actualStdErr := stderr.String()
 
 	assert.Equal(t, "", actualStdOut)
-	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error\n"))
+	assert.Equal(t, "test | FATAL | fatal error\n", actualStdErr)
 	assert.Equal(t, 1, got)
 
 }
@@ -610,7 +611,7 @@ func TestFatalf(t *testing.T) {
 	actualStdErr := stderr.String()
 
 	assert.Equal(t, "", actualStdOut)
-	assert.True(t, strings.HasPrefix(actualStdErr, "test | FATAL | fatal error 2\n"))
+	assert.Equal(t, "test | FATAL | fatal error 2\n", actualStdErr)
 	assert.Equal(t, 1, got)
 
 }
