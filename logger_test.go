@@ -523,9 +523,11 @@ func TestStackTrace(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
+	wd, _ := os.Getwd()
+
 	assert.Equal(t, "", actualStdOut)
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | my error\n"))
-	assert.Equal(t, "test | ERROR | my error\n\tgo-log_test.TestStackTrace                        /Users/pclaerhout/Downloads/JonoFotografie/go-log/logger_test.go:521\n", actualStdErr)
+	assert.Equal(t, "test | ERROR | my error\n\tgo-log_test.TestStackTrace                        "+wd+"/logger_test.go:521\n", actualStdErr)
 
 }
 
@@ -548,14 +550,20 @@ func Test_StackTraceCustom(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
+	wd, _ := os.Getwd()
+
 	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | boom\n\tgo-log_test.Test_StackTraceCustom                 /Users/pclaerhout/Downloads/JonoFotografie/go-log/logger_test.go:546\n", actualStdErr)
+	assert.Equal(t, "test | ERROR | boom\n\tgo-log_test.Test_StackTraceCustom                 "+wd+"/logger_test.go:548\n", actualStdErr)
 
 }
 
 func TestFormattedStackTrace(t *testing.T) {
+
+	wd, _ := os.Getwd()
+
 	actual := log.FormattedStackTrace(errors.New("my error"))
-	assert.Equal(t, "my error\n\tgo-log_test.TestFormattedStackTrace               /Users/pclaerhout/Downloads/JonoFotografie/go-log/logger_test.go:557", actual)
+	assert.Equal(t, "my error\n\tgo-log_test.TestFormattedStackTrace               "+wd+"/logger_test.go:564", actual)
+
 }
 
 func TestFatal(t *testing.T) {
