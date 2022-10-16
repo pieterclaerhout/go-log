@@ -8,7 +8,6 @@ import (
 func main() {
 
 	log.DebugMode = true
-	log.DebugSQLMode = true
 	log.PrintTimestamp = true
 	log.PrintColors = true
 	log.TimeFormat = "2006-01-02 15:04:05.000"
@@ -19,7 +18,6 @@ func main() {
 	log.Debugf("debug arg1 %d", 1)
 	log.DebugDump(myVar, "debug prefix")
 	log.DebugSeparator("debug title")
-	log.DebugSQL("select * from debug_mytable")
 
 	log.Info("info arg1", "info arg2")
 	log.Infof("info arg1 %d", 1)

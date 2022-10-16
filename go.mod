@@ -3,12 +3,12 @@ module github.com/pieterclaerhout/go-log
 go 1.14
 
 require (
-	github.com/fatih/color v1.9.0
-	github.com/pieterclaerhout/go-formatter v1.0.4
+	github.com/fatih/color v1.13.0
+	github.com/kr/pretty v0.3.1 // indirect
 	github.com/pkg/errors v0.9.1
-	github.com/rotisserie/eris v0.4.0
-	github.com/sanity-io/litter v1.2.0
-	github.com/stretchr/testify v1.4.0
-	golang.org/x/tools v0.0.0-20200522201501-cb1345f3a375 // indirect
-	honnef.co/go/tools v0.0.1-2020.1.4 // indirect
+	github.com/rotisserie/eris v0.5.4
+	github.com/sanity-io/litter v1.5.5
+	github.com/stretchr/testify v1.8.0
+	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )

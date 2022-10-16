@@ -147,7 +147,6 @@ func TestPrintMessage_Color(t *testing.T) {
 func resetLogConfig() {
 	PrintTimestamp = false
 	DebugMode = false
-	DebugSQLMode = false
 	TimeZone, _ = time.LoadLocation("Europe/Brussels")
 	TimeFormat = TestingTimeFormat
 }

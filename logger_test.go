@@ -68,85 +68,6 @@ func TestDebugDisabled(t *testing.T) {
 
 }
 
-func TestDebugSQLEnabledValid(t *testing.T) {
-
-	resetLogConfig()
-	stdout, stderr := redirectOutput()
-	defer resetLogOutput()
-
-	log.DebugMode = true
-	log.DebugSQLMode = true
-	log.PrintColors = false
-
-	log.DebugSQL("select * from mytable")
-
-	actualStdOut := stdout.String()
-	actualStdErr := stderr.String()
-
-	assert.Equal(t, "test | DEBUG | SELECT *\nFROM mytable\n", actualStdOut)
-	assert.Equal(t, "", actualStdErr)
-
-}
-
-func TestDebugSQLEnabledError(t *testing.T) {
-
-	resetLogConfig()
-	stdout, stderr := redirectOutput()
-	defer resetLogOutput()
-
-	log.DebugMode = true
-	log.DebugSQLMode = true
-	log.PrintColors = false
-
-	log.DebugSQL("throw-error")
-
-	actualStdOut := stdout.String()
-	actualStdErr := stderr.String()
-
-	assert.Equal(t, "", actualStdOut)
-	assert.Equal(t, "test | ERROR | Invalid SQL statement\n", actualStdErr)
-
-}
-
-func TestDebugSQLEnabledEmpty(t *testing.T) {
-
-	resetLogConfig()
-	stdout, stderr := redirectOutput()
-	defer resetLogOutput()
-
-	log.DebugMode = true
-	log.DebugSQLMode = true
-	log.PrintColors = false
-
-	log.DebugSQL("")
-
-	actualStdOut := stdout.String()
-	actualStdErr := stderr.String()
-
-	assert.Equal(t, "test | DEBUG | \n", actualStdOut)
-	assert.Equal(t, "", actualStdErr)
-
-}
-
-func TestDebugSQLDisabled(t *testing.T) {
-
-	resetLogConfig()
-	stdout, stderr := redirectOutput()
-	defer resetLogOutput()
-
-	log.DebugMode = false
-	log.DebugSQLMode = false
-
-	log.DebugSQL("select * from mytable")
-
-	actualStdOut := stdout.String()
-	actualStdErr := stderr.String()
-
-	assert.Equal(t, "", actualStdOut)
-	assert.Equal(t, "", actualStdErr)
-
-}
-
 func TestDebugSeparatorDisabled(t *testing.T) {
 
 	resetLogConfig()
@@ -154,7 +75,6 @@ func TestDebugSeparatorDisabled(t *testing.T) {
 	defer resetLogOutput()
 
 	log.DebugMode = false
-	log.DebugSQLMode = false
 
 	log.DebugSeparator("debug")
 
@@ -173,7 +93,6 @@ func TestDebugSeparatorEnabled(t *testing.T) {
 	defer resetLogOutput()
 
 	log.DebugMode = true
-	log.DebugSQLMode = true
 	log.PrintColors = false
 
 	log.DebugSeparator("debug")
@@ -527,7 +446,7 @@ func TestStackTrace(t *testing.T) {
 
 	assert.Equal(t, "", actualStdOut)
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | my error\n"))
-	assert.Equal(t, "test | ERROR | my error\n\tgo-log_test.TestStackTrace                        "+wd+"/logger_test.go:521\n", actualStdErr)
+	assert.Equal(t, "test | ERROR | my error\n\tgo-log_test.TestStackTrace                        "+wd+"/logger_test.go:440\n", actualStdErr)
 
 }
 
@@ -553,7 +472,7 @@ func Test_StackTraceCustom(t *testing.T) {
 	wd := "github.com/pieterclaerhout/go-log"
 
 	assert.Equal(t, "", actualStdOut, "stdout")
-	assert.Equal(t, "test | ERROR | boom\n\tgo-log_test.Test_StackTraceCustom                 "+wd+"/logger_test.go:548\n", actualStdErr)
+	assert.Equal(t, "test | ERROR | boom\n\tgo-log_test.Test_StackTraceCustom                 "+wd+"/logger_test.go:467\n", actualStdErr)
 
 }
 
@@ -562,7 +481,7 @@ func TestFormattedStackTrace(t *testing.T) {
 	wd := "github.com/pieterclaerhout/go-log"
 
 	actual := log.FormattedStackTrace(errors.New("my error"))
-	assert.Equal(t, "my error\n\tgo-log_test.TestFormattedStackTrace               "+wd+"/logger_test.go:564", actual)
+	assert.Equal(t, "my error\n\tgo-log_test.TestFormattedStackTrace               "+wd+"/logger_test.go:483", actual)
 
 }
 
@@ -688,7 +607,6 @@ func resetLogConfig() {
 	log.PrintTimestamp = true
 	log.PrintColors = true
 	log.DebugMode = false
-	log.DebugSQLMode = false
 	log.TimeZone, _ = time.LoadLocation("Europe/Brussels")
 	log.TimeFormat = log.TestingTimeFormat
 }
