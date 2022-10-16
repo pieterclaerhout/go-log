@@ -523,7 +523,7 @@ func TestStackTrace(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	wd, _ := os.Getwd()
+	wd := "github.com/pieterclaerhout/go-log"
 
 	assert.Equal(t, "", actualStdOut)
 	assert.True(t, strings.HasPrefix(actualStdErr, "test | ERROR | my error\n"))
@@ -550,7 +550,7 @@ func Test_StackTraceCustom(t *testing.T) {
 	actualStdOut := stdout.String()
 	actualStdErr := stderr.String()
 
-	wd, _ := os.Getwd()
+	wd := "github.com/pieterclaerhout/go-log"
 
 	assert.Equal(t, "", actualStdOut, "stdout")
 	assert.Equal(t, "test | ERROR | boom\n\tgo-log_test.Test_StackTraceCustom                 "+wd+"/logger_test.go:548\n", actualStdErr)
@@ -559,7 +559,7 @@ func Test_StackTraceCustom(t *testing.T) {
 
 func TestFormattedStackTrace(t *testing.T) {
 
-	wd, _ := os.Getwd()
+	wd := "github.com/pieterclaerhout/go-log"
 
 	actual := log.FormattedStackTrace(errors.New("my error"))
 	assert.Equal(t, "my error\n\tgo-log_test.TestFormattedStackTrace               "+wd+"/logger_test.go:564", actual)
