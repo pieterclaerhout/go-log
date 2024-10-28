@@ -3,7 +3,7 @@ module github.com/pieterclaerhout/go-log
 go 1.14
 
 require (
-	github.com/fatih/color v1.17.0
+	github.com/fatih/color v1.18.0
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/rotisserie/eris v0.5.4
